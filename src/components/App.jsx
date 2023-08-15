@@ -5,7 +5,11 @@ import { Filter } from "./Filter/Filter";
 import { ContactsList } from "./Contacts/ContactsList/ContactsList";
 
 
-const INITIAL_STATE = {
+
+const LOCAL_KEY = "contacts"
+
+export class App extends Component {
+state = {
   contacts: [
     { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
     { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -16,10 +20,6 @@ const INITIAL_STATE = {
   name: '',
   number: '',
 };
-
-
-export class App extends Component {
-state = {...INITIAL_STATE}
  
 handleChange = evt => {
   const {name, value} = evt.target;
@@ -69,6 +69,17 @@ handleChangeFilter = evt => {
   }));
 }
 
+componentDidUpdate(PrevState, Prevprops) {
+  if (PrevState !== this.state.contacts) {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(this.state.contacts));
+  }
+}
+
+
+componentDidMount() {
+  const localData = JSON.parse(localStorage.getItem(LOCAL_KEY))
+  this.setState({contacts: localData})
+}
 
   render() {
     const FilterContacts = this.state.contacts.filter(contact =>
