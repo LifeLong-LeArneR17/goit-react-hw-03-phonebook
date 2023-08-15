@@ -79,6 +79,7 @@ componentDidUpdate(PrevState, Prevprops) {
 componentDidMount() {
   const localData = JSON.parse(localStorage.getItem(LOCAL_KEY))
   this.setState({contacts: localData})
+  if (localData === null) {return}
 }
 
   render() {
