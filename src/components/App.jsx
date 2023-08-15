@@ -84,8 +84,9 @@ componentDidMount() {
 
   render() {
     const FilterContacts = this.state.contacts.filter(contact =>
-      contact.name.toLowerCase().trim().includes(this.state.filter.toLowerCase())
+      contact.name.toLowerCase().trim().includes(this.state.filter?.toLowerCase() || '')
     );
+    
     
     return (
       <>
