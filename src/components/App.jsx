@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import PropTypes from 'prop-types';
 import { nanoid } from "nanoid";
 import { Filter } from "./Filter/Filter";
 import { ContactsList } from "./Contacts/ContactsList/ContactsList";
@@ -124,3 +124,22 @@ componentDidMount() {
 }
 
 export default App;
+
+
+
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id:PropTypes.string.isRequired,
+      name:PropTypes.string.isRequired,
+      number:PropTypes.string.isRequired,
+    })
+  ),
+  filter:PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleChangeFilter: PropTypes.func,
+  onChangeDelete: PropTypes.func,
+}
