@@ -28,7 +28,7 @@ handleChange = evt => {
 
 
 
-hadleSubmit = evt => {
+handleSubmit = evt => {
   evt.preventDefault();
    const {name, number} = this.state;
     // Проверка наличия контакта с таким именем
@@ -78,8 +78,9 @@ componentDidUpdate(PrevState, Prevprops) {
 
 componentDidMount() {
   const localData = JSON.parse(localStorage.getItem(LOCAL_KEY))
-  this.setState({contacts: localData})
-  if (localData === null) {return}
+  if(localData) {
+    this.setState({contacts: localData});
+  }
 }
 
   render() {
@@ -90,7 +91,7 @@ componentDidMount() {
     
     return (
       <>
-      <form onSubmit={this.hadleSubmit}>
+      <form onSubmit={this.handleSubmit}>
       <h2>Name</h2>
       <input
   type="text"
